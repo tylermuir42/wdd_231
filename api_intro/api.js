@@ -21,4 +21,19 @@ async function getJson(endpoint) {
   return data;
 }
 
-getJson('alerts?parkCode=acad,dena');
+function listTemplate(item){
+    return `<li><a href="${item.url}">${item.fullName}</a> ${item.states}</li>`;
+}
+
+async function renderClimbingList(){
+    const endpoint = "activities/parks?q=climbing"
+    const listElement = document.getElementById("outputList")
+    const data = await getJson(endpoint)
+    const parks = data.data
+    const listHtml = parks.map(listTemplate).join("")
+    listElement.innerHTML = listHtml;
+}
+
+renderClimbingList();
+
+//getJson('alerts?parkCode=acad,dena');
