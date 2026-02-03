@@ -1,5 +1,16 @@
 // storage.js
+
+// Add input and button
+// When the button is clicked, get the contents of the input
+// Insert it into local storage
+// Insert the name into the page so it displays
+// When the page loads, check local storage
+// for a stored name. If there is one, display it on the page.
+
+
 let tasks = [];
+
+const nameButton = document.querySelector("#submitName");
 
 function taskTemplate(task) {
   return `
@@ -60,9 +71,19 @@ function manageTasks(e) {
   }
 }
 
+function saveName(){
+    const inputEl = document.querySelector("#userName");
+    if(inputEl.value){
+        localStorage.setItem("name", inputEl.value);
+        document.querySelector(".user").innerText = inputEl.value;
+        inputEl.value = "";
+    }
+}
+
 // Add your event listeners here
 document.querySelector("#submitTask").addEventListener("click", newTask);
 document.querySelector("#todoList").addEventListener("click", manageTasks);
+nameButton.addEventListener("click", saveName);
 
 // render  the initial list of tasks (if any) when the page loads
 renderTasks(tasks);
