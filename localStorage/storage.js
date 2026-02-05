@@ -37,6 +37,7 @@ function newTask() {
   const task = document.querySelector("#todo").value;
   // add it to our arrays tasks
   tasks.push({ detail: task, completed: false });
+  setLS("tasks", tasks);
   // render out the list
   renderTasks(tasks);
 }
@@ -48,6 +49,7 @@ function removeTask(taskElement) {
     (task) => task.detail != taskElement.querySelector('p').innerText
   );
   taskElement.remove();
+  setLS("tasks", tasks);
 }
 
 function completeTask(taskElement) {
@@ -57,6 +59,7 @@ function completeTask(taskElement) {
   tasks[taskIndex].completed = tasks[taskIndex].completed ? false : true;
   taskElement.classList.toggle("strike");
   console.log(tasks);
+  setLS("tasks", tasks);
 }
 
 function manageTasks(e) {
@@ -80,6 +83,28 @@ function saveName(){
     }
 }
 
+//Get local storage
+function getLS(key){
+  return JSON.parse(localStorage.getItem(key));
+}
+
+function setLS(key, data){
+  const dataSting = JSON.stringify(data);
+  localStorage.setItem(key, dataSting);
+}
+
+function init(){
+    const storedName = localStorage.getItem("name");
+    if(storedName){
+        document.querySelector(".user").innerText = storedName;
+    }
+    const storedTasks = getLS("tasks");
+    if(storedTasks){
+        tasks = storedTasks;
+    }
+    renderTasks(tasks);
+}
+
 // Add your event listeners here
 document.querySelector("#submitTask").addEventListener("click", newTask);
 document.querySelector("#todoList").addEventListener("click", manageTasks);
@@ -87,3 +112,4 @@ nameButton.addEventListener("click", saveName);
 
 // render  the initial list of tasks (if any) when the page loads
 renderTasks(tasks);
+init();
