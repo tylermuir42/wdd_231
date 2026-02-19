@@ -59,3 +59,87 @@
     height: 100px;
     opacity: 1;
   }
+
+  /* Purple square: orbits viewport with squash & stretch at each edge */
+  .purple {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: purple;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+    animation: orbit-squash 8s linear infinite;
+  }
+
+  @keyframes orbit-squash {
+    /* Top edge: left → right */
+    0% {
+      top: 0;
+      left: 0;
+      transform: scale(1);
+    }
+    23% {
+      top: 0;
+      left: calc(100vw - 50px);
+      transform: scale(1);
+    }
+    /* Hit right edge: squash horizontal, stretch vertical */
+    25% {
+      top: 0;
+      left: calc(100vw - 50px);
+      transform: scaleX(0.5) scaleY(1.4);
+    }
+    27% {
+      top: 0;
+      left: calc(100vw - 50px);
+      transform: scale(1);
+    }
+    /* Right edge: top → bottom */
+    48% {
+      top: calc(100vh - 50px);
+      left: calc(100vw - 50px);
+      transform: scale(1);
+    }
+    /* Hit bottom edge: squash vertical, stretch horizontal */
+    50% {
+      top: calc(100vh - 50px);
+      left: calc(100vw - 50px);
+      transform: scaleX(1.4) scaleY(0.5);
+    }
+    52% {
+      top: calc(100vh - 50px);
+      left: calc(100vw - 50px);
+      transform: scale(1);
+    }
+    /* Bottom edge: right → left */
+    73% {
+      top: calc(100vh - 50px);
+      left: 0;
+      transform: scale(1);
+    }
+    /* Hit left edge: squash horizontal, stretch vertical */
+    75% {
+      top: calc(100vh - 50px);
+      left: 0;
+      transform: scaleX(0.5) scaleY(1.4);
+    }
+    77% {
+      top: calc(100vh - 50px);
+      left: 0;
+      transform: scale(1);
+    }
+    /* Left edge: bottom → top */
+    98% {
+      top: 0;
+      left: 0;
+      transform: scale(1);
+    }
+    /* Hit top edge: squash vertical, stretch horizontal */
+    100% {
+      top: 0;
+      left: 0;
+      transform: scaleX(1.4) scaleY(0.5);
+    }
+  }
