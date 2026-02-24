@@ -20,3 +20,9 @@ window.addEventListener("click", (e) => {
         closeModal();
     }
 });
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeModal();
+    }
+});
